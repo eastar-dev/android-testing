@@ -1,12 +1,12 @@
 package dev.eastar.tdd.main
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import dev.eastar.tdd.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import dev.eastar.tdd.databinding.MainFrBinding
 
 class MainFr : Fragment() {
 
@@ -14,17 +14,12 @@ class MainFr : Fragment() {
         fun newInstance() = MainFr()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var bb: MainFrBinding
+    private val viewModel: MainViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.main_fr, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        bb = MainFrBinding.inflate(inflater, container, false)
+        bb.viewmodel = viewModel
+        return bb.root
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-    }
-
-
 }

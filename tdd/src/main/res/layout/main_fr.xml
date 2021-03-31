@@ -24,6 +24,7 @@
             android:drawableTop="@drawable/ic_single"
             android:padding="8dp"
             android:text="싱글"
+            android:onClick="@{()->viewmodel.startMultiPlay()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/multi"

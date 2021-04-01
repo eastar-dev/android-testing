@@ -12,8 +12,9 @@ class MainViewModel : ViewModel() {
         exit.value = Unit
     }
 
-    fun startSinglePlay() {
+    fun startSinglePlay(): MutableLiveData<Class<out Fragment>> {
         moveFragment.value = SingleFr::class.java
+        return moveFragment
     }
 
     fun startMultiPlay() {

@@ -1,10 +1,9 @@
 package dev.eastar.tdd.main
 
 import androidx.lifecycle.ViewModel
+import dev.eastar.tdd.data.repo.GameRepository
 
-class SingleViewModel constructor(val gameRepository: GameRepository) : ViewModel() {
-    // TODO: Implement the ViewModel
-
+class SingleViewModel constructor(private val gameRepository: GameRepository) : ViewModel() {
     init {
         gameRepository.generatRandomNumber()
     }

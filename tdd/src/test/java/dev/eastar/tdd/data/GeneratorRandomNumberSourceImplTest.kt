@@ -1,5 +1,6 @@
 package dev.eastar.tdd.data
 
+import dev.eastar.tdd.data.source.GeneratorRandomNumberSourceImpl
 import org.hamcrest.MatcherAssert
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.collection.IsIn

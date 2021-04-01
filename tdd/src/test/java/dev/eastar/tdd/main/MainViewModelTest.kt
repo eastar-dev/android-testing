@@ -5,7 +5,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.hamcrest.MatcherAssert
-import org.hamcrest.core.Is.`is`
+import org.hamcrest.Matchers.`is`
+import org.hamcrest.Matchers.isA
 import org.junit.*
 import org.junit.runner.RunWith
 
@@ -46,9 +47,13 @@ class MainViewModelTest {
 
         val observer = Observer<Class<out Fragment>> {}
         try {
-            val value = mainViewModel.moveFragment.value
-            //MatcherAssert.assertThat(value, `is`(SingleFr::class))
-            Assert.assertEquals(value, SingleFr::class)
+            //val actual = mainViewModel.moveFragment.value
+            //MatcherAssert.assertThat(actual, isA(SingleFr::class.java))
+            //MatcherAssert.assertThat(actual, `is`(SingleFr::class.java))
+            Assert.assertEquals(actual, Fragment::class.java)
+
+            val actual = Fragment::class.java
+            MatcherAssert.assertThat(actual, ??? )
 
         } finally {
             // Whatever happens, don't forget to remove the observer!
@@ -58,17 +63,17 @@ class MainViewModelTest {
 
     @Test
     fun startMultiPlay() {
-        //val mainViewModel = MainViewModel()
-        //mainViewModel.startMultiPlay()
-        //
-        //val observer = Observer<Class<out Fragment>> {}
-        //try {
-        //    val value = mainViewModel.moveFragment.value
-        //    MatcherAssert.assertThat(value, `is`(MultiFr::class))
-        //
-        //} finally {
-        //    // Whatever happens, don't forget to remove the observer!
-        //    mainViewModel.moveFragment.removeObserver(observer)
-        //}
+        val mainViewModel = MainViewModel()
+        mainViewModel.startMultiPlay()
+
+        val observer = Observer<Class<out Fragment>> {}
+        try {
+            val value = mainViewModel.moveFragment.value
+            MatcherAssert.assertThat(value, `is`(MultiFr::class))
+
+        } finally {
+            // Whatever happens, don't forget to remove the observer!
+            mainViewModel.moveFragment.removeObserver(observer)
+        }
     }
 }

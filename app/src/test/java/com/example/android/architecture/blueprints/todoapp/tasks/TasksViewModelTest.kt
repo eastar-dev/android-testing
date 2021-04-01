@@ -6,9 +6,12 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.android.architecture.blueprints.todoapp.Event
 import com.example.android.architecture.blueprints.todoapp.getOrAwaitValue
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.MatcherAssert
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.not
 import org.hamcrest.Matchers.nullValue
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,10 +22,17 @@ class TasksViewModelTest {
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
+    lateinit var tasksViewModel: TasksViewModel
+
+    @Before
+    fun setupViewModel() {
+        tasksViewModel = TasksViewModel(ApplicationProvider.getApplicationContext())
+    }
+
     @Test
     fun `addNewTask 생성하기`() {
         // Given a fresh TasksViewModel
-        val tasksViewModel = TasksViewModel(ApplicationProvider.getApplicationContext())
+        val tasksViewModel = this.tasksViewModel
 
         // When adding a new task
         tasksViewModel.addNewTask()
@@ -51,6 +61,22 @@ class TasksViewModelTest {
             // Whatever happens, don't forget to remove the observer!
             tasksViewModel.newTaskEvent.removeObserver(observer)
         }
+    }
+
+    @Test
+    fun setFilterAllTasks_tasksAddViewVisible() {
+
+        // Given a fresh ViewModel
+        val tasksViewModel = this.tasksViewModel
+
+
+        // When the filter type is ALL_TASKS
+        tasksViewModel.setFiltering(TasksFilterType.ALL_TASKS)
+
+
+        // Then the "Add task" action is visible
+        val result = tasksViewModel.tasksAddViewVisible.getOrAwaitValue()
+        MatcherAssert.assertThat(true, `is`(result))
     }
 
 

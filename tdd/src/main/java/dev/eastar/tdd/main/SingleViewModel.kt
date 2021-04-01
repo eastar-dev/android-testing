@@ -5,7 +5,7 @@ import dev.eastar.tdd.data.repo.GameRepository
 
 class SingleViewModel constructor(private val gameRepository: GameRepository) : ViewModel() {
     init {
-        gameRepository.generatRandomNumber()
+        gameRepository.generateRandomNumber()
     }
 
     fun tryNumber(number: Int, who: String = "") {

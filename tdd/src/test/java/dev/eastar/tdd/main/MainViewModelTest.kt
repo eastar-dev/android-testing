@@ -2,25 +2,16 @@ package dev.eastar.tdd.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import dev.eastar.tdd.InstantExecutorExtension
 import org.hamcrest.MatcherAssert
-import org.hamcrest.core.Is.`is`
-import org.junit.After
-import org.junit.Before
+import org.hamcrest.Matchers.`is`
 import org.junit.Rule
-import org.junit.Test
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.junit.jupiter.api.extension.RegisterExtension
 
+@ExtendWith(InstantExecutorExtension::class)
 class MainViewModelTest {
-
-    @get:Rule
-    var instantExecutorRule = InstantTaskExecutorRule()
-
-    @Before
-    fun setUp() {
-    }
-
-    @After
-    fun tearDown() {
-    }
 
     @Test
     fun exit() {
@@ -29,6 +20,7 @@ class MainViewModelTest {
 
         val observer = Observer<Unit> {}
         try {
+            mainViewModel.exit.observeForever(observer)
             val value = mainViewModel.exit.value
             MatcherAssert.assertThat(value, `is`(Unit))
 
@@ -38,36 +30,4 @@ class MainViewModelTest {
         }
     }
 
-    @Test
-    fun startSinglePlay() {
-        //val mainViewModel = MainViewModel()
-        //mainViewModel.startSinglePlay()
-        //
-        //val observer = Observer<Class<out Fragment>> {}
-        //try {
-        //    val value = mainViewModel.moveFragment.value
-        //    //MatcherAssert.assertThat(value, `is`(SingleFr::class))
-        //    Assert.assertEquals(value, SingleFr::class)
-        //
-        //} finally {
-        //    // Whatever happens, don't forget to remove the observer!
-        //    mainViewModel.moveFragment.removeObserver(observer)
-        //}
-    }
-
-    @Test
-    fun startMultiPlay() {
-        //val mainViewModel = MainViewModel()
-        //mainViewModel.startMultiPlay()
-        //
-        //val observer = Observer<Class<out Fragment>> {}
-        //try {
-        //    val value = mainViewModel.moveFragment.value
-        //    MatcherAssert.assertThat(value, `is`(MultiFr::class))
-        //
-        //} finally {
-        //    // Whatever happens, don't forget to remove the observer!
-        //    mainViewModel.moveFragment.removeObserver(observer)
-        //}
-    }
 }

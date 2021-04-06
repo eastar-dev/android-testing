@@ -1,19 +1,15 @@
-package dev.eastar.tdd.data
+package dev.eastar.tdd.data.source
 
-import dev.eastar.tdd.data.source.GeneratorRandomNumberSourceImpl
-import org.hamcrest.CoreMatchers.allOf
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers
+import org.hamcrest.MatcherAssert
 import org.hamcrest.collection.IsIn
-import org.hamcrest.core.Is.`is`
-import org.junit.Test
-import java.lang.Integer.max
-import java.lang.Integer.min
+import org.hamcrest.core.Is
+import org.junit.jupiter.api.Test
 
+import org.junit.jupiter.api.Assertions.*
 
 class GeneratorRandomNumberSourceImplTest {
 
-    @Test
+    @org.junit.Test
     fun getRandomNumber1between100() {
         //given
         val generatorRandomNumberSource = GeneratorRandomNumberSourceImpl()
@@ -21,11 +17,11 @@ class GeneratorRandomNumberSourceImplTest {
             //when
             val actual: Int = generatorRandomNumberSource.getRandomNumber1between100()
             //then
-            assertThat(actual, IsIn((0..100).toList()))
+            MatcherAssert.assertThat(actual, IsIn((0..100).toList()))
         }
     }
 
-    @Test
+    @org.junit.Test
     fun getManyRandomNumberMin1Max100() {
         //given
         val generatorRandomNumberSource = GeneratorRandomNumberSourceImpl()
@@ -34,11 +30,11 @@ class GeneratorRandomNumberSourceImplTest {
         var max = Int.MIN_VALUE
         repeat(100000) {
             val actual: Int = generatorRandomNumberSource.getRandomNumber1between100()
-            min = min(min, actual)
-            max = max(max, actual)
+            min = Integer.min(min, actual)
+            max = Integer.max(max, actual)
         }
         //then
-        assertThat(min, `is`(1))
-        assertThat(max, `is`(100))
+        MatcherAssert.assertThat(min, Is.`is`(1))
+        MatcherAssert.assertThat(max, Is.`is`(100))
     }
 }

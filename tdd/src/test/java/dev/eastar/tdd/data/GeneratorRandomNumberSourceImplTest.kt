@@ -1,12 +1,15 @@
 package dev.eastar.tdd.data
 
 import dev.eastar.tdd.data.source.GeneratorRandomNumberSourceImpl
-import org.hamcrest.MatcherAssert
-import org.hamcrest.Matchers.`is`
+import org.hamcrest.CoreMatchers.allOf
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers
 import org.hamcrest.collection.IsIn
+import org.hamcrest.core.Is.`is`
 import org.junit.Test
 import java.lang.Integer.max
-import java.lang.Math.min
+import java.lang.Integer.min
+
 
 class GeneratorRandomNumberSourceImplTest {
 
@@ -18,7 +21,7 @@ class GeneratorRandomNumberSourceImplTest {
             //when
             val actual: Int = generatorRandomNumberSource.getRandomNumber1between100()
             //then
-            MatcherAssert.assertThat(actual, IsIn((1..100).toList()))
+            assertThat(actual, IsIn((0..100).toList()))
         }
     }
 
@@ -35,7 +38,7 @@ class GeneratorRandomNumberSourceImplTest {
             max = max(max, actual)
         }
         //then
-        MatcherAssert.assertThat(min, `is`(1))
-        MatcherAssert.assertThat(max, `is`(100))
+        assertThat(min, `is`(1))
+        assertThat(max, `is`(100))
     }
 }

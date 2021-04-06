@@ -1,15 +1,14 @@
 package dev.eastar.tdd.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.hamcrest.MatcherAssert
 import org.hamcrest.core.Is.`is`
-import org.junit.*
-import org.junit.runner.RunWith
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 
-@RunWith(AndroidJUnit4::class)
 class MainViewModelTest {
 
     @get:Rule
